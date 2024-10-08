@@ -5,7 +5,7 @@ root = tk.Tk()
 def NavBar(title):
     global root
     menu = CreateMenu(root)
-    menu.add_menu('المخزن', [('جديد', AddNewStorage), ('عرض', main)])
+    menu.add_menu('المخزن', [('جديد', AddNewStorage), ('عرض', Main)])
     menu.add_menu('رصيد السيارة', [('جديد', AddNewWalletCar), ('عرض', ShowWalletCar)])
     menu.add_menu('المرتجعات', [('جديد', AddNewReturn), ('عرض', ShowReturn)])
     menu.add_menu('المديونية', [('جديد', AddNewIndebtedness), ('عرض', ShowIndebtedness)])
@@ -35,11 +35,11 @@ def ShowWalletCar():
 def AddNewStorage():
     NavBar('إضافة مخزن جديد')
 
-def main():
+def Main():
     NavBar('المخزن')
 
 if __name__ == '__main__':
-    main()
+    Main()
 
 
 

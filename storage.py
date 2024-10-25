@@ -311,6 +311,8 @@ def storageDisplay(root):
 
     for index, item in enumerate(storage):
         item_id, count, item_type, price, date = item  # تفكيك التفاصيل
+
+     
         total = int(count) * float(price)  # حساب الإجمالي
 
         values = [item_id, count, item_type, price, date, f"{total:.2f}"]
@@ -332,6 +334,8 @@ def storageDisplay(root):
 
     # عرض السعر الإجمالي
     total_price = GetTotalPrice()
+    if total_price is None:
+        total_price = 0
     ttk.Label(current_frame, text="الإجمالي", font=('Arial', 12, 'bold'), padding=10).grid(row=len(storage) + 1, column=5)
     ttk.Label(current_frame, text=f"{total_price:.2f}", padding=10).grid(row=len(storage) + 1, column=6)
 

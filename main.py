@@ -28,7 +28,7 @@ class LoginPage:
         self.heading.place(x=120, y=30)
 
         # ========== حقل اسم المستخدم =================
-        self.username_label = Label(self.lgn_frame, text="المستخدم أسم ", bg="#040405", fg="#4f4e4d",
+        self.username_label = Label(self.lgn_frame, text="المستخدم إسم ", bg="#040405", fg="#4f4e4d",
                                     font=("yu gothic ui", 13, "bold"))
         self.username_label.place(x=50, y=150)
 

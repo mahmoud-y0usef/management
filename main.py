@@ -80,12 +80,12 @@ class UpdateCredentials:
         self.frame.pack()
 
         # ======= عنوان النافذة =======================
-        self.heading = Label(self.frame, text="تحديث المعلومات", font=('yu gothic ui', 15, "bold"),
+        self.heading = Label(self.frame, text="المعلومات تحديث", font=('yu gothic ui', 15, "bold"),
                              bg="#040405", fg='white')
         self.heading.place(x=80, y=20)
 
         # ======= حقل اسم المستخدم الجديد =============
-        self.username_label = Label(self.frame, text="الأسم الجديد", bg="#040405", fg="#4f4e4d",
+        self.username_label = Label(self.frame, text=" الإسم", bg="#040405", fg="#4f4e4d",
                                     font=("yu gothic ui", 12, "bold"))
         self.username_label.place(x=50, y=80)
 
@@ -93,7 +93,7 @@ class UpdateCredentials:
         self.username_entry.place(x=50, y=110, width=300)
 
         # ======= حقل كلمة المرور الجديدة =============
-        self.password_label = Label(self.frame, text="كلمة المرور الجديده", bg="#040405", fg="#4f4e4d",
+        self.password_label = Label(self.frame, text="المرور كلمة ", bg="#040405", fg="#4f4e4d",
                                     font=("yu gothic ui", 12, "bold"))
         self.password_label.place(x=50, y=150)
 

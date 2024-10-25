@@ -1,5 +1,6 @@
 modules = {
-    'tk':'tk' # tkinter
+    'tk':'tk' , # tkinter 
+    'tkcalendar':'tkcalendar' # tkinter
 }
 
 # install modules

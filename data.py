@@ -26,6 +26,43 @@ def create_table():
               ''')
     
 
+    c.execute('''
+              CREATE TABLE IF NOT EXISTS wallet
+              (
+                  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                  count INTEGER,
+                  type INTEGER,
+                  price INTEGER,
+                  date STAMP,
+                  FOREIGN KEY(type) REFERENCES type(id)
+              )            
+              ''')
+    
+
+    c.execute('''
+              
+              CREATE TABLE IF NOT EXISTS returns
+              (
+                  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                  count INTEGER,
+                  type INTEGER,
+                  price INTEGER,
+                  date STAMP,
+                  FOREIGN KEY(type) REFERENCES type(id)
+              )  
+
+              ''')
+    
+    c.execute('''
+              CREATE TABLE IF NOT EXISTS indebtedness
+              (
+                  id INTEGER PRIMARY KEY AUTOINCREMENT,
+                  name TEXT,
+                  type TEXT,
+                  price INTEGER,
+                  date STAMP
+              )
+              ''')
 
 create_table()
 conn.commit()

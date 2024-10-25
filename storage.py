@@ -420,7 +420,6 @@ def delete_type(root , type_id):
     DeleteType(type_id)
     typesDisplay(root)
 
-
 ## display types View
 def typesDisplay(root):
     clear_frame()

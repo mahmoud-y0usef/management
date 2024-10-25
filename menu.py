@@ -1,5 +1,6 @@
 from tkinter import Menu
 
+
 class CreateMenu:
     def __init__(self, root):
         self.root = root
@@ -12,6 +13,9 @@ class CreateMenu:
         self.menu.add_cascade(label=name, menu=new_menu)
         for item in items:
             new_menu.add_command(label=item[0], command=item[1])
+    def add_menucommand(self, name, command):
+        """إضافة عنصر ينفذ الوظيفة مباشرة عند النقر عليه."""
+        self.menu.add_command(label=name, command=command)
 
     def add_title(self, title):
         self.root.title(title)

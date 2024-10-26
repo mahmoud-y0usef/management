@@ -173,6 +173,7 @@ def addStorageView(root):
     current_frame.grid(row=1, column=0, columnspan=8, padx=20, pady=20)
     root.title("إضافة إلى المخزن")
     entries = {}
+
     # Form labels and entries
     ttk.Label(current_frame, text="الكمية").grid(row=0, column=0, padx=5, pady=5)
     count_entry = ttk.Entry(current_frame)
@@ -180,7 +181,7 @@ def addStorageView(root):
     entries['count'] = count_entry
 
     ttk.Label(current_frame, text="النوع").grid(row=1, column=0, padx=5, pady=5)
-    type_entry = ttk.Combobox(current_frame, values=[item[1] for item in GetStorageType()])
+    type_entry = ttk.Combobox(current_frame, values=[item[1] for item in GetStorageType()], state="readonly")
     type_entry.grid(row=1, column=1, padx=5, pady=5)
     entries['type'] = type_entry
 
@@ -190,8 +191,8 @@ def addStorageView(root):
     entries['price'] = price_entry
 
     ttk.Label(current_frame, text="التاريخ").grid(row=3, column=0, padx=5, pady=5)
-    date_entry = DateEntry(current_frame, width=12, background='darkblue', foreground='white', 
-                           borderwidth=2, year=datetime.now().year, month=datetime.now().month, 
+    date_entry = DateEntry(current_frame, width=12, background='darkblue', foreground='white',
+                           borderwidth=2, year=datetime.now().year, month=datetime.now().month,
                            day=datetime.now().day)
     date_entry.grid(row=3, column=1, padx=5, pady=5)
     entries['date'] = date_entry
@@ -635,7 +636,19 @@ def check_count_return(root, item_id):
     item = c.fetchone()
 
     if item is None:
-        messagebox.showerror("خطأ", "العنصر غير موجود.")
+        messagebox.showerror("خطأ", "العنصر غير موجود في المحفظة.")
+        return
+
+    # التحقق مما إذا كان النوع موجودًا في المخزن
+    item_type = item[2]  # Assuming the type is the third column (index 2)
+    c.execute('SELECT * FROM storage WHERE type = ?', (item_type,))
+    storage_item = c.fetchone()
+
+    if storage_item is None:
+        messagebox.showerror("خطأ", "العنصر غير موجود في المخزن.")
+        c.execute('DELETE FROM wallet WHERE id = ?', (item_id,))
+        conn.commit()  # Make sure to commit the change
+        storageDisplay()
         return
 
     # عرض إدخال الكمية
@@ -646,8 +659,10 @@ def check_count_return(root, item_id):
     entries['count'] = count_entry
 
     # زر إرجاع إلى المخزن
-    submit_btn = ttk.Button(current_frame, text="إرجاع إلى المخزن", 
-                            command=lambda: return_to_storage(root, entries, item_id))
+    submit_btn = ttk.Button(
+        current_frame, text="إرجاع إلى المخزن",
+        command=lambda: return_to_storage(root, entries, item_id)
+    )
     submit_btn.grid(row=1, column=0, columnspan=2, padx=5, pady=5)
 
 

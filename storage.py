@@ -234,7 +234,7 @@ def edit_item(root, item_id):
     entries['count'] = count_entry
 
     ttk.Label(current_frame, text="النوع").grid(row=1, column=0, padx=5, pady=5)
-    type_entry = ttk.Combobox(current_frame, values=[item[1] for item in GetStorageType()])
+    type_entry = ttk.Combobox(current_frame, values=[item[1] for item in GetStorageType()] , state="readonly")
     type_entry.set(item[2])
     type_entry.grid(row=1, column=1, padx=5, pady=5)
     entries['type'] = type_entry
@@ -593,7 +593,7 @@ def displayWallet(root):
     root.title("عرض رصيد السيارة")
 
     # العناوين
-    headers = ["المعرف", "الكمية", "النوع", "السعر", "التاريخ", "الإجمالي", "إرجاع إلي المخزن"]
+    headers = ["المعرف", "الكمية", "النوع", "السعر", "التاريخ", "الإجمالي", "إرجاع إلي المخزن" , "حذف"]
 
     # عرض العناوين
     for idx, header in enumerate(headers):
@@ -614,10 +614,21 @@ def displayWallet(root):
         return_btn = ttk.Button(current_frame, text="إرجاع إلي المخزن", command=lambda id=item_id: check_count_return(root, id))
         return_btn.grid(row=index + 1, column=len(values), padx=5, pady=5)
 
+        # زر الحذف
+        del_btn = ttk.Button(current_frame, text="حذف", command=lambda id=item_id: delete_fromWallet(root, id))
+        del_btn.grid(row=index + 1, column=len(values) + 1, padx=5, pady=5)
+        
+
         # عرض السعر الإجمالي
         total_price = GetTotalWalletPrice()
         ttk.Label(current_frame, text="الإجمالي", font=('Arial', 12, 'bold'), padding=10).grid(row=len(wallet) + 1, column=5)
         ttk.Label(current_frame, text=f"{total_price:.2f}", padding=10).grid(row=len(wallet) + 1, column=6)
+
+
+def delete_fromWallet(root, item_id):
+    c.execute('DELETE FROM wallet WHERE id = ?', (item_id,))
+    conn.commit()
+    displayWallet(root)
 
 
 def check_count_return(root, item_id):

@@ -12,7 +12,16 @@ updatemenuisopen = False
 class LoginPage:
     def __init__(self, window):
         self.window = window
-        self.window.geometry('400x500+500+200')  # نافذة بحجم صغير
+        # center the window on the screen with any screen responsive
+        width_of_window = 400
+        height_of_window = 500
+        screen_width = self.window.winfo_screenwidth()
+        screen_height = self.window.winfo_screenheight()
+        x_coordinate = (screen_width/2)-(width_of_window/2)
+        y_coordinate = (screen_height/2)-(height_of_window/2)
+        self.window.geometry("%dx%d+%d+%d" %(width_of_window,height_of_window,x_coordinate,y_coordinate))
+        self.window.configure(bg='#040405')
+
         self.window.resizable(0, 0)
         self.window.title('تسجيل الدخول')
         self.window.iconbitmap("images\\egypt_studio_logo.ico")
@@ -153,7 +162,8 @@ def page():
 def mainpage():
     root = tk.Tk()
     menu = CreateMenu(root)
-    menu.geometry('800x800+300+200')
+    # open full size window
+    root.state('zoomed')
     menu.add_title('القائمة الرئيسية')
 
     # تشغيل عرض المخزن تلقائيًا عند فتح الصفحة
@@ -169,7 +179,6 @@ def mainpage():
 
     # إعداد الأيقونة والخصائص الأساسية
     root.iconbitmap("images\\egypt_studio_logo.ico")
-    root.resizable(0, 0)
 
     # تشغيل الحلقة الرئيسية للواجهة
     root.mainloop()
